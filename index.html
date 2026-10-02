@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>You're Invited 💌</title>
+<title>Farewell Dinner 💌</title>
 
 <style>
 * {
@@ -17,49 +17,74 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #ffd6e7, #fff3f8);
-    overflow: hidden;
 }
 
 .invite-card {
-    width: 90%;
-    max-width: 420px;
-    padding: 45px 25px;
+    width: 100%;
+    max-width: 430px;
+    padding: 35px 25px;
     text-align: center;
     background: white;
-    border-radius: 25px;
+    border-radius: 28px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.12);
 }
 
 h1 {
-    font-size: 18px;
-    color: #888;
-    margin-bottom: 10px;
+    font-size: 30px;
+    color: #333;
+    margin: 0 0 20px;
 }
 
-h2 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 30px;
+.bubu {
+    width: 170px;
+    max-width: 70%;
+    margin: 5px auto 20px;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.question {
+    font-size: 22px;
+    color: #444;
+    margin: 20px 0;
+    line-height: 1.4;
 }
 
 .details {
     color: #666;
-    line-height: 1.7;
-    margin-bottom: 30px;
+    line-height: 1.8;
+    font-size: 16px;
+    margin-bottom: 25px;
 }
 
-.btn-container {
+.description {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.9;
+    margin: 20px 5px 30px;
+}
+
+.buttons {
     display: flex;
     justify-content: center;
     gap: 15px;
-    position: relative;
 }
 
 button {
     border: none;
-    padding: 14px 25px;
+    padding: 13px 25px;
     border-radius: 50px;
     font-size: 16px;
     cursor: pointer;
@@ -76,34 +101,38 @@ button {
 }
 
 #noBtn {
-    background: #eee;
+    background: #eeeeee;
     color: #555;
-    position: relative;
 }
 
-#message {
+#noBtn:hover {
+    transform: scale(1.05);
+}
+
+#response {
     display: none;
     margin-top: 25px;
+    color: #ff5c8a;
     font-size: 20px;
-    color: #ff4f87;
     font-weight: bold;
+    line-height: 1.6;
 }
 
 .heart {
     position: fixed;
-    font-size: 25px;
+    font-size: 24px;
     animation: fall 2s linear forwards;
     pointer-events: none;
 }
 
 @keyframes fall {
     0% {
-        transform: translateY(-50px) rotate(0deg);
+        transform: translateY(-30px);
         opacity: 1;
     }
 
     100% {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translateY(100vh);
         opacity: 0;
     }
 }
@@ -114,51 +143,66 @@ button {
 
 <div class="invite-card">
 
-    <h1>💌 A Little Invitation</h1>
+    <h1>💌 Farewell Dinner</h1>
 
-    <h2>Will you come to my party? 🥺</h2>
+    <img src="bubu-dudu.png" class="bubu" alt="Bubu & Dudu">
 
-    <div class="details">
-        📅 Saturday, 10 October<br>
-        🕖 7:00 PM<br>
-        📍 Somewhere Special
+    <div class="question">
+        Will you come to my farewell dinner? 🥺
     </div>
 
-    <div class="btn-container">
+    <div class="details">
+        📅 <strong>4 October</strong><br>
+        🕖 <strong>7:00 PM</strong>
+    </div>
 
-        <button id="yesBtn" onclick="celebrate()">
+    <div class="description">
+        想在离开之前，和你一起吃一顿饭。<br>
+        不需要特别的理由，只是想好好珍惜这一次见面的机会。❤️
+    </div>
+
+    <div class="buttons">
+
+        <button id="yesBtn" onclick="sayYes()">
             Yes! 🎉
         </button>
 
-        <button id="noBtn">
+        <button id="noBtn" onclick="sayNo()">
             No 😭
         </button>
 
     </div>
 
-    <div id="message">
-        YAY!!! See you there! ❤️🎉
-    </div>
+    <div id="response"></div>
 
 </div>
 
 <script>
 
-const noBtn = document.getElementById("noBtn");
+function sayYes() {
 
-noBtn.addEventListener("mouseover", function() {
+    const response = document.getElementById("response");
 
-    const x = Math.random() * 250 - 125;
-    const y = Math.random() * 150 - 75;
+    response.style.display = "block";
 
-    noBtn.style.transform =
-        `translate(${x}px, ${y}px)`;
+    response.innerHTML =
+        "YAY!!! See you there! ❤️🎉";
 
-});
+    createHearts();
+}
 
-function celebrate() {
+function sayNo() {
 
-    document.getElementById("message").style.display = "block";
+    const response = document.getElementById("response");
+
+    response.style.display = "block";
+
+    response.innerHTML =
+        "为什么呀？🥺<br>真的不要来吗？🥹";
+
+}
+
+function createHearts() {
 
     for (let i = 0; i < 30; i++) {
 
@@ -182,7 +226,6 @@ function celebrate() {
             heart.remove();
         }, 4000);
     }
-
 }
 
 </script>
